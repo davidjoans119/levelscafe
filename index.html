@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Levels Cafe & Restro, Nibra — explore the menu, place an order, and request a table reservation.">
+<title>Levels Cafe & Restro | Nibra</title>
+<style>
+:root{--ink:#fff8ee;--muted:#dfc9b7;--orange:#d88b2c;--deep:#4a1e0d;--glass:rgba(35,18,12,.52);--line:rgba(255,239,220,.28);--paper:#fff8ef}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#481d0d;color:var(--ink);font-family:Inter,Arial,sans-serif;line-height:1.5}a{color:inherit}button,input,select,textarea{font:inherit}button,a,input,select,textarea{outline-offset:4px}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #ffc66c}
+.hero{min-height:92vh;position:relative;display:flex;align-items:center;justify-content:center;padding:28px;overflow:hidden;background:linear-gradient(120deg,rgba(45,17,7,.84),rgba(88,35,10,.5)),url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=2000&q=85') center/cover}
+.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(25,10,5,.42),rgba(37,13,4,.65));pointer-events:none}
+.hero-frame{z-index:1;width:min(1240px,100%);min-height:76vh;border:1px solid rgba(255,224,192,.6);border-radius:18px;background:rgba(45,20,10,.35);backdrop-filter:blur(5px);box-shadow:0 20px 70px #1b0906;display:flex;flex-direction:column}
+nav{display:flex;align-items:center;justify-content:space-between;padding:22px 30px;border-bottom:1px solid var(--line);gap:20px}
+.logo{font-weight:800;letter-spacing:.12em;font-size:1.15rem;text-decoration:none}.navlinks{display:flex;gap:25px;flex-wrap:wrap}.navlinks a{text-decoration:none;font-size:.92rem;color:#fff4e8}.navlinks a:hover{color:#ffc66c}
+.hero-content{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 22px}.eyebrow{letter-spacing:.24em;text-transform:uppercase;color:#ffd08a;font-size:.78rem;font-weight:700}.hero h1{font-size:clamp(3.2rem,9vw,7.4rem);line-height:.95;margin:18px 0 16px;letter-spacing:-.055em;text-transform:uppercase}.hero p{font-size:clamp(1rem,2vw,1.3rem);max-width:620px;color:#f5e4d4;margin:0 0 28px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}.btn{border:1px solid rgba(255,255,255,.5);border-radius:999px;padding:12px 22px;text-decoration:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:transform .2s,background .2s}.btn:hover{transform:translateY(-2px)}.btn.primary{background:#fff4e4;color:#32160a;border-color:#fff4e4;font-weight:700}.btn.ghost{background:rgba(20,10,5,.25);color:#fff}
+.hero-bottom{display:flex;justify-content:space-between;gap:12px;padding:16px 28px;color:#f4ddc6;font-size:.82rem;border-top:1px solid var(--line);flex-wrap:wrap}
+section{padding:76px max(22px,calc((100% - 1160px)/2))}.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:30px}.section-head h2{font-size:clamp(2.2rem,5vw,4rem);line-height:1;margin:0;letter-spacing:-.05em}.section-head p{max-width:460px;color:var(--muted);margin:0}
+.about{background:#fff7ed;color:#32170c;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}.about p{color:#6d4c39}.about-visual{min-height:300px;border-radius:18px;background:linear-gradient(145deg,#a75c24,#3a1a0d);display:flex;align-items:center;justify-content:center;padding:30px;border:1px solid #e7c6a4}.about-visual span{font-size:clamp(2rem,5vw,4.2rem);font-weight:900;line-height:.95;text-align:center;color:#fff1dc}
+.menu{background:#4a1e0d}.menu-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}.filter{background:transparent;color:#ffeedc;border:1px solid var(--line);border-radius:99px;padding:8px 15px;cursor:pointer}.filter.active{background:#ffeedc;color:#401b0b}
+.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.dish{border:1px solid var(--line);border-radius:16px;padding:20px;background:rgba(255,255,255,.055);display:flex;flex-direction:column;gap:8px}.dish .tag{font-size:.72rem;color:#ffc66c;text-transform:uppercase;letter-spacing:.12em}.dish h3{margin:0;font-size:1.25rem}.dish p{margin:0;color:var(--muted);font-size:.9rem;flex:1}.dish-foot{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-weight:700}.dish-foot button{background:#fff1df;color:#3d1909;border:0;border-radius:99px;padding:8px 13px;cursor:pointer;font-weight:700}
+.booking{background:#f9efe2;color:#32170c}.booking-wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:35px}.booking-info p{color:#72503b}.form-card{background:white;border:1px solid #ead5c0;border-radius:18px;padding:24px;box-shadow:0 10px 35px #4a1e0d0d}.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:.85rem;font-weight:700}.field input,.field select,.field textarea{width:100%;border:1px solid #d8c2ad;border-radius:10px;padding:11px;color:#32170c;background:#fff}.checkline{display:flex;gap:9px;align-items:flex-start;font-size:.82rem;color:#684b38}.checkline input{margin-top:4px}.form-card button{margin-top:18px;background:#4a1e0d;color:white;border:0;border-radius:999px;padding:12px 22px;cursor:pointer}.notice{margin-top:12px;font-size:.9rem;color:#28623d}
+.location{background:#2e1309}.location-grid{display:grid;grid-template-columns:1fr 1fr;gap:25px}.location-card{border:1px solid var(--line);border-radius:16px;padding:25px;background:var(--glass)}.location-card p{color:var(--muted)}.mapbox{min-height:280px;border-radius:16px;overflow:hidden;background:#6a371c;border:1px solid var(--line)}.mapbox iframe{width:100%;height:100%;min-height:280px;border:0}
+.contact{background:#f9efe2;color:#32170c}.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px}.contact p{color:#72503b}.contact a{color:#53260f}
+footer{padding:35px max(22px,calc((100% - 1160px)/2));background:#1f0c05;color:#e9d3bf}.footer-top{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.footer-links{display:flex;gap:16px;flex-wrap:wrap}.footer-links a{font-size:.83rem;color:#e9d3bf}.legal{border-top:1px solid #ffffff25;margin-top:24px;padding-top:20px;font-size:.78rem;color:#bda18a;display:grid;grid-template-columns:1fr 1fr;gap:20px}.legal details{margin-bottom:8px}.legal summary{cursor:pointer;color:#e9d3bf}
+.cookie{position:fixed;z-index:9;bottom:18px;left:18px;right:18px;max-width:760px;margin:auto;background:rgba(30,12,5,.94);border:1px solid #d8a66c;border-radius:14px;padding:18px;box-shadow:0 15px 45px #0006;display:none}.cookie p{margin:0 0 12px;color:#f4dfca;font-size:.9rem}.cookie-actions{display:flex;gap:10px;flex-wrap:wrap}.cookie button{border-radius:99px;padding:8px 15px;border:1px solid #f6e2cb;background:transparent;color:#fff;cursor:pointer}.cookie button:first-child{background:#fff0dc;color:#301407}
+.modal{display:none;position:fixed;inset:0;background:#160802cc;z-index:10;align-items:center;justify-content:center;padding:20px}.modal.show{display:flex}.modal-inner{background:#fff7ed;color:#32170c;padding:28px;border-radius:18px;width:min(520px,100%);max-height:90vh;overflow:auto}.modal-inner h2{margin-top:0}.modal-inner button.close{float:right;border:0;background:transparent;font-size:1.5rem;cursor:pointer;color:#32170c}.cart-list{display:flex;flex-direction:column;gap:8px}.cart-row{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #ead5c0;padding:8px 0}.cart-total{font-weight:800;font-size:1.2rem;margin-top:15px}
+@media(max-width:800px){.navlinks{gap:12px}.about,.booking-wrap,.location-grid,.contact-grid{grid-template-columns:1fr}.menu-grid{grid-template-columns:repeat(2,1fr)}.section-head{align-items:start;flex-direction:column}.hero{min-height:85vh;padding:12px}.hero-frame{min-height:80vh}nav{padding:18px;flex-direction:column}.hero-bottom{padding:14px}}
+@media(max-width:520px){.menu-grid,.fields,.legal{grid-template-columns:1fr}.hero h1{font-size:3.25rem}.menu-grid{gap:10px}.dish{padding:15px}}
+
+/* Premium visual polish */
+:root{--orange:#f0a23a;--gold:#ffd18b;--deep:#2a1007;--line:rgba(255,238,218,.22)}
+body{background:#210c05;overflow-x:hidden}
+.hero{background-image:linear-gradient(115deg,rgba(25,8,3,.78),rgba(77,27,7,.36) 52%,rgba(25,8,3,.75)),url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=2200&q=90');background-position:center;background-size:cover}
+.hero:after{content:"";position:absolute;width:70vw;height:70vw;max-width:900px;max-height:900px;border:1px solid rgba(255,179,75,.25);border-radius:50%;left:-30vw;bottom:-48vw;box-shadow:0 0 0 70px rgba(255,179,75,.035),0 0 0 140px rgba(255,179,75,.025);pointer-events:none}
+.hero-frame{border-radius:22px;background:linear-gradient(135deg,rgba(255,255,255,.09),rgba(30,10,4,.48));backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-color:rgba(255,225,190,.5);box-shadow:0 30px 100px #120601a8,inset 0 1px rgba(255,255,255,.18)}
+.logo{font-size:1.3rem;letter-spacing:.17em}.navlinks a{position:relative}.navlinks a:after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:1px;background:var(--gold);transition:width .25s}.navlinks a:hover:after{width:100%}
+.hero-content{animation:heroIn .85s ease both}.eyebrow{color:var(--gold)}.hero h1{text-shadow:0 8px 40px #0008}.hero h1 span{filter:drop-shadow(0 4px 18px #f0a23a45)}
+.btn{transition:transform .25s ease,box-shadow .25s ease,background .25s ease}.btn:hover{transform:translateY(-3px);box-shadow:0 10px 28px #0003}.btn.primary:hover{background:#ffdcb0}
+section{position:relative}.about{background:linear-gradient(130deg,#fff8ef,#f1dfcb)}.about-visual{position:relative;overflow:hidden;min-height:370px;background:linear-gradient(135deg,#a35a24,#391709 70%);box-shadow:0 20px 45px #6c351d22}.about-visual:before,.about-visual:after{content:"";position:absolute;border:1px solid #f7c17a55;border-radius:50%;width:350px;height:350px;right:-120px;top:-120px}.about-visual:after{width:230px;height:230px;right:-55px;top:-55px}.about-visual span{position:relative;z-index:1;text-shadow:0 5px 20px #0005;letter-spacing:-.06em}
+.menu{background:radial-gradient(ellipse at 15% 0%,#743814 0%,#4a1e0d 38%,#2d1007 100%)}.dish{position:relative;overflow:hidden;transition:transform .28s ease,border-color .28s ease,background .28s ease;min-height:210px}.dish:before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,194,107,.08),transparent 55%);pointer-events:none}.dish:hover{transform:translateY(-6px);border-color:#e9ad5b;background:rgba(255,255,255,.09)}.dish .tag{font-weight:700}.dish-foot button{transition:transform .2s,background .2s}.dish-foot button:hover{transform:scale(1.06);background:#ffd39b}
+.booking{background:linear-gradient(140deg,#fff8ef,#f2e0cc)}.form-card{box-shadow:0 18px 55px #4a1e0d12;border-radius:20px}.field input,.field select,.field textarea{transition:border-color .2s,box-shadow .2s}.field input:focus,.field select:focus,.field textarea:focus{border-color:#b96c2a;box-shadow:0 0 0 3px #b96c2a20}
+.location{background:radial-gradient(ellipse at 80% 20%,#5c2a12,#2e1309 65%)}.location-card{transition:transform .25s,border-color .25s}.location-card:hover{transform:translateY(-4px);border-color:#d89a4f}.mapbox{box-shadow:0 18px 40px #0003}
+.contact{background:linear-gradient(130deg,#fff7ec,#f1dfcc)}footer{background:linear-gradient(120deg,#1c0903,#321306)}
+.cookie{backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px)}.modal-inner{box-shadow:0 25px 80px #0007}.modal.show .modal-inner{animation:pop .25s ease both}
+@keyframes heroIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}@keyframes pop{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}.reveal.visible{opacity:1;transform:translateY(0)}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+
+
+/* LEVELS — immersive editorial upgrade */
+:root{--acid:#f4b24f;--cream:#fff4e7}
+html{scroll-padding-top:88px}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:20;opacity:.12;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E")}
+nav{position:sticky;top:0;z-index:8;background:rgba(34,13,5,.72);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.hero{min-height:100svh}
+.hero-frame{min-height:calc(100svh - 56px)}
+.hero-content{position:relative}
+.hero-content:before{content:"";position:absolute;width:min(65vw,650px);height:min(65vw,650px);border:1px solid #ffdda333;border-radius:50%;z-index:-1;box-shadow:0 0 0 45px #ffdda30a,0 0 0 90px #ffdda308}
+.hero h1{font-size:clamp(3.8rem,10vw,9rem);letter-spacing:-.075em}
+.hero .eyebrow:before,.hero .eyebrow:after{content:"";display:inline-block;width:30px;height:1px;background:var(--gold);vertical-align:middle;margin:0 12px}
+.scroll-ribbon{overflow:hidden;background:var(--acid);color:#321608;white-space:nowrap;padding:13px 0;transform:rotate(-1deg) scale(1.02);position:relative;z-index:2}
+.ribbon-track{display:flex;align-items:center;justify-content:space-around;gap:34px;width:max-content;animation:ribbonMove 28s linear infinite;font-size:.82rem;font-weight:900;letter-spacing:.18em}
+.ribbon-track i{font-style:normal;font-size:1.2rem}
+@keyframes ribbonMove{to{transform:translateX(-35%)}}
+.vibe-section{background:#261006;padding:90px max(22px,calc((100% - 1160px)/2));display:grid;grid-template-columns:.7fr 1.3fr;gap:40px;align-items:center}
+.vibe-intro h2{font-size:clamp(3rem,6vw,5.6rem);line-height:.9;letter-spacing:-.07em;margin:18px 0}
+.vibe-intro h2 em{font-family:Georgia,serif;color:var(--gold);font-weight:400}
+.vibe-intro p{color:var(--muted);max-width:300px}
+.vibe-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.vibe-card{min-height:290px;border-radius:16px;padding:18px;display:flex;flex-direction:column;justify-content:space-between;text-decoration:none;overflow:hidden;position:relative;isolation:isolate;transition:transform .3s}
+.vibe-card:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#1809041c,#180904d9)}
+.vibe-card:hover{transform:translateY(-8px) rotate(-1deg)}
+.vibe-card span,.vibe-card small{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}
+.vibe-card strong{font-size:clamp(1.8rem,3vw,3rem);line-height:.95;letter-spacing:-.06em}
+.vibe-one{background:url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=700&q=85') center/cover}
+.vibe-two{background:url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=700&q=85') center/cover}
+.vibe-three{background:url('https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=700&q=85') center/cover}
+.menu-tools{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+.menu-tools .menu-filters{margin:0}
+.menu-search{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:99px;padding:0 16px;min-width:min(100%,290px);color:var(--gold)}
+.menu-search input{background:transparent;border:0;outline:0;color:white;padding:11px 0;width:100%;min-width:0}
+.menu-search input::placeholder{color:#d9bba4}
+.dish{border-radius:20px;min-height:225px;padding:22px}
+.dish h3{font-size:1.4rem;letter-spacing:-.035em}
+.dish-foot button{padding:10px 16px}
+.gallery img{filter:saturate(.82);transition:transform .6s cubic-bezier(.2,.8,.2,1),filter .4s}
+.gallery img:hover{transform:scale(1.035);filter:saturate(1.1)}
+section .section-head h2{letter-spacing:-.065em}
+.form-card{border-radius:22px}
+#cartFloat{backdrop-filter:blur(12px);border:1px solid #ffffff8c}
+.cart-row{align-items:center}
+.qty-controls{display:flex;align-items:center;gap:8px}
+.qty-controls button{width:27px;height:27px;border-radius:50%;border:1px solid #d8c2ad;background:#fff;color:#32170c;cursor:pointer}
+#scrollProgress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--acid);z-index:30;box-shadow:0 0 12px #f4b24f}
+#backTop{position:fixed;right:22px;bottom:82px;z-index:6;width:42px;height:42px;border-radius:50%;border:1px solid #ffffff55;background:#291006d9;color:#fff;font-size:1.2rem;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;backdrop-filter:blur(12px)}
+#backTop.show{opacity:1;pointer-events:auto}
+#backTop:hover{transform:translateY(-3px)}
+@media(max-width:850px){.vibe-section{grid-template-columns:1fr}.vibe-cards{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:600px){.vibe-section{padding-top:65px;padding-bottom:65px}.vibe-cards{grid-template-columns:1fr}.vibe-card{min-height:210px}.menu-tools{align-items:stretch}.menu-search{width:100%}.hero .eyebrow:before,.hero .eyebrow:after{width:16px;margin:0 6px}.hero h1{font-size:clamp(3.1rem,16vw,5.5rem)}}
+
+</style>
+</head>
+<body>
+<header class="hero" id="home">
+ <div class="hero-frame">
+  <nav aria-label="Main navigation">
+   <a class="logo" href="#home">LEVELS<span style="color:#ffc66c">.</span></a>
+   <div class="navlinks"><a href="#menu">Menu</a><a href="#gallery">Gallery</a><a href="#booking">Seat Booking</a><a href="#location">Location</a><a href="#about">About</a><a href="#contact">Contact</a></div>
+  </nav>
+  <div class="hero-content">
+   <div class="eyebrow">Cafe • Restro • Nibra</div>
+   <h1>Levels Cafe<br><span style="color:#ffc66c">&amp; Restro</span></h1>
+   <p>A cozy place for good food, great company, and memorable moments. Explore our menu or reserve your table.</p>
+   <div class="actions"><a class="btn primary" href="#menu">Explore Menu ↗</a><a class="btn ghost" href="#booking">Book a Seat</a><a class="btn ghost" href="#location">⌖ Find Us</a></div>
+  </div>
+  <div class="hero-bottom"><span>📍 Nibra, Howrah, West Bengal</span><span>Freshly prepared • Warm hospitality</span></div>
+ </div>
+</header>
+
+<div class="scroll-ribbon" aria-label="Cafe highlights">
+ <div class="ribbon-track"><span>GOOD FOOD</span><i>✦</i><span>GREAT COMPANY</span><i>✦</i><span>COFFEE & CONVERSATIONS</span><i>✦</i><span>YOUR TABLE IS WAITING</span><i>✦</i><span>GOOD FOOD</span><i>✦</i><span>GREAT COMPANY</span><i>✦</i></div>
+</div>
+<section class="vibe-section">
+ <div class="vibe-intro"><span class="eyebrow">The Levels feeling</span><h2>Make room<br>for <em>moments.</em></h2><p>Slow down, catch up, and make your next cafe plan a good one.</p></div>
+ <div class="vibe-cards">
+  <a class="vibe-card vibe-one" href="#menu"><span>01 / SIP</span><strong>Coffee<br>breaks.</strong><small>Find your favourite cup ↗</small></a>
+  <a class="vibe-card vibe-two" href="#menu"><span>02 / BITE</span><strong>Cravings<br>handled.</strong><small>Explore the menu ↗</small></a>
+  <a class="vibe-card vibe-three" href="#booking"><span>03 / MEET</span><strong>Time well<br>spent.</strong><small>Save your seat ↗</small></a>
+ </div>
+</section>
+
+<section class="about" id="about">
+ <div><div class="eyebrow" style="color:#a65c20">Our Story</div><h2 style="font-size:clamp(2.4rem,5vw,4.2rem);line-height:1.02;letter-spacing:-.05em">A little escape.<br>A lot of flavour.</h2><p>Welcome to Levels Cafe & Restro — your neighbourhood spot to unwind over delicious bites and refreshing drinks. Whether it’s a casual hangout, a family outing, or a special catch-up, there’s a seat for you.</p><a class="btn primary" style="background:#4a1e0d;color:#fff" href="#booking">Plan your visit ↗</a></div>
+ <div class="about-visual" role="img" aria-label="Decorative warm cafe-inspired abstract artwork"><span>GOOD<br>FOOD.<br>GOOD<br>MOOD.</span></div>
+</section>
+
+<section class="menu" id="menu">
+ <div class="section-head"><div><div class="eyebrow">Made to be enjoyed</div><h2>Our Menu</h2></div><p>Browse a sample menu and add items to your cart. Menu and pricing are placeholders until the cafe confirms them.</p></div>
+ <div class="menu-tools"><label class="menu-search"><span aria-hidden="true">⌕</span><input id="menuSearch" type="search" placeholder="Search dishes or drinks..." aria-label="Search menu"></label><div class="menu-filters" role="group" aria-label="Menu categories"><button class="filter active" data-filter="All">All</button><button class="filter" data-filter="Cafe">Cafe</button><button class="filter" data-filter="Snacks">Snacks</button><button class="filter" data-filter="Meals">Meals</button><button class="filter" data-filter="Dessert">Dessert</button></div></div>
+ <div class="menu-grid" id="menuGrid"></div>
+</section>
+
+
+<section class="gallery" id="gallery" style="background:#fff7ed;color:#32170c;padding-top:65px;padding-bottom:65px">
+ <div class="section-head"><div><div class="eyebrow" style="color:#a65c20">A peek inside</div><h2>Moments at Levels</h2></div><p>Warm corners, tasty plates, and time well spent. Replace these sample photos with the cafe’s own licensed images.</p></div>
+ <div style="display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:14px">
+  <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1000&q=85" alt="Warm cafe interior with tables and ambient lighting" loading="lazy" style="width:100%;height:300px;object-fit:cover;border-radius:16px">
+  <img src="https://images.unsplash.com/photo-1507914372368-b2b085b925a1?auto=format&fit=crop&w=800&q=85" alt="Cafe coffee served on a table" loading="lazy" style="width:100%;height:300px;object-fit:cover;border-radius:16px">
+  <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=800&q=85" alt="Coffee preparation in a cafe" loading="lazy" style="width:100%;height:300px;object-fit:cover;border-radius:16px">
+ </div>
+</section>
+
+<section class="booking" id="booking">
+ <div class="section-head"><div><div class="eyebrow" style="color:#a65c20">Save your spot</div><h2>Book a Seat</h2></div><p>Send a reservation request. This demo shows a local confirmation only; real bookings need a connected reservation system.</p></div>
+ <div class="booking-wrap"><div class="booking-info"><h3>Make it a date with good food.</h3><p>Choose your preferred date, time and party size. We’ll display your request details after submission.</p><p><strong>Location:</strong> Nibra, Howrah, West Bengal</p></div>
+ <form class="form-card" id="bookingForm"><div class="fields">
+  <div class="field"><label for="bName">Name</label><input id="bName" name="name" autocomplete="name" required maxlength="80"></div>
+  <div class="field"><label for="bPhone">Phone</label><input id="bPhone" name="phone" type="tel" autocomplete="tel" required maxlength="20"></div>
+  <div class="field"><label for="bDate">Date</label><input id="bDate" name="date" type="date" required></div>
+  <div class="field"><label for="bTime">Time</label><select id="bTime" name="time" required><option value="">Choose time</option><option>12:00 PM</option><option>1:00 PM</option><option>2:00 PM</option><option>5:00 PM</option><option>6:00 PM</option><option>7:00 PM</option><option>8:00 PM</option><option>9:00 PM</option></select></div>
+  <div class="field"><label for="bGuests">Guests</label><select id="bGuests" name="guests"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7+</option></select></div>
+  <div class="field"><label for="bNote">Special request (optional)</label><input id="bNote" name="note" maxlength="180" placeholder="Any preferences"></div>
+  <div class="field full"><label class="checkline"><input type="checkbox" required> I agree that the cafe may use the details above to respond to this reservation request. Please see the <a href="#privacy">Privacy Notice</a>.</label></div>
+ </div><button type="submit">Request Reservation</button><div class="notice" id="bookingNotice" role="status" aria-live="polite"></div></form></div>
+</section>
+
+<section class="location" id="location">
+ <div class="section-head"><div><div class="eyebrow">Come say hello</div><h2>Find Us</h2></div><p>Visit Levels Cafe & Restro in Nibra, Howrah. Open the map for directions.</p></div>
+ <div class="location-grid"><div class="location-card"><h3>Levels Cafe & Restro</h3><p>Nibra, Howrah, West Bengal, India</p><p><strong>Hours:</strong> Please confirm current opening hours with the cafe.</p><a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=Levels+Cafe+%26+Restro+Nibra+Howrah" target="_blank" rel="noopener noreferrer">Open Google Maps ↗</a></div>
+ <div class="mapbox"><iframe title="Map showing Levels Cafe and Restro near Nibra, Howrah" loading="lazy" src="https://maps.google.com/maps?q=Levels%20Cafe%20%26%20Restro%20Nibra%20Howrah&t=&z=15&ie=UTF8&iwloc=&output=embed" referrerpolicy="no-referrer-when-downgrade"></iframe></div></div>
+</section>
+
+<section class="contact" id="contact">
+ <div class="section-head"><div><div class="eyebrow" style="color:#a65c20">We’re here to help</div><h2>Contact</h2></div><p>Contact details below are placeholders and should be replaced with the cafe’s verified information.</p></div>
+ <div class="contact-grid"><div><h3>Levels Cafe & Restro</h3><p>Nibra, Howrah, West Bengal, India</p><p><strong>Phone:</strong> <a href="tel:+910000000000">+91-XXXXXXXXXX</a></p><p><strong>Email:</strong> <a href="mailto:hello@example.com">hello@example.com</a></p></div>
+ <form class="form-card" id="contactForm"><div class="fields"><div class="field"><label for="cName">Name</label><input id="cName" required maxlength="80"></div><div class="field"><label for="cEmail">Email</label><input id="cEmail" type="email" required maxlength="120"></div><div class="field full"><label for="cMessage">Message</label><textarea id="cMessage" rows="4" required maxlength="1000"></textarea></div><div class="field full"><label class="checkline"><input type="checkbox" required> I consent to being contacted about this message.</label></div></div><button type="submit">Send Message</button><div class="notice" id="contactNotice" role="status" aria-live="polite"></div></form></div>
+</section>
+
+<footer>
+ <div class="footer-top"><a class="logo" href="#home">LEVELS<span style="color:#ffc66c">.</span></a><div class="footer-links"><a href="#menu">Menu</a><a href="#gallery">Gallery</a><a href="#booking">Book a Seat</a><a href="#location">Location</a><a href="#contact">Contact</a><a href="#privacy">Privacy</a><a href="#terms">Terms</a><a href="#refund">Refunds</a><a href="#cookies">Cookies</a><a href="#delete-data">Data deletion</a></div></div>
+ <div class="legal" id="privacy"><div><details><summary>Privacy Notice</summary><p>This demo collects form details only in the page to display a sample response; it does not transmit or store them. In production, publish a verified privacy notice naming the data controller, purposes, legal basis, retention periods, processors, user rights, and contact method. Collect only information necessary to fulfill requests.</p></details>
+ <details id="terms"><summary>Terms of Service</summary><p>Website content is provided for general information. Real service terms must identify the business, describe order/reservation processes, pricing, cancellation terms, and applicable law. Have the final terms reviewed by a qualified professional.</p></details>
+ <details id="refund"><summary>Refund & Cancellation Policy</summary><p>Actual refund and cancellation rules must be confirmed by the business and shown clearly before payment. No payment is processed by this demo.</p></details>
+ <details id="cookies"><summary>Cookie Policy</summary><p>This static demo uses no analytics or advertising cookies. If production tools add cookies or similar technologies, disclose them and obtain consent where required.</p></details></div>
+ <div><details><summary>Accessibility & Business Information</summary><p>Semantic sections, keyboard focus styles, form labels, accessible status announcements, and image alt text are included. Replace placeholders with verified business details and ensure accessibility and contrast are checked before launch.</p></details>
+ <details><summary>Responsible design checklist</summary><p>No fake reviews, unsupported claims, hidden fees, or manipulative patterns are included. Third-party services should be audited; any stock imagery must be properly licensed. Add unsubscribe controls if marketing messages are introduced. For child-directed services, implement age-appropriate safeguards after legal review.</p></details>
+ <details id="delete-data"><summary>Request data deletion</summary><p>For a production site, provide a verified contact or self-service deletion workflow. Demo form entries are not sent or saved. Contact the business through its verified channel to request deletion of information held by it.</p></details>
+ <p>© <span id="year"></span> Levels Cafe & Restro. Business details to be verified.</p></div></div>
+</footer>
+
+<div class="cookie" id="cookieBanner" role="dialog" aria-label="Cookie preferences"><p><strong>Cookie choices</strong><br>This demo does not use analytics or advertising cookies. If optional cookies are added later, you can choose whether to allow them.</p><div class="cookie-actions"><button id="acceptCookies">Accept</button><button id="rejectCookies">Reject optional</button><button id="cookieClose">Close</button></div></div>
+<div class="modal" id="cartModal" role="dialog" aria-modal="true" aria-labelledby="cartTitle"><div class="modal-inner"><button class="close" id="closeCart" aria-label="Close cart">×</button><h2 id="cartTitle">Your Order</h2><div class="cart-list" id="cartList"></div><div class="cart-total" id="cartTotal">Total: ₹0</div><p style="font-size:.82rem;color:#72503b">Checkout is a demo preview. No payment or order is sent to the cafe.</p><button class="btn primary" id="checkout" style="background:#4a1e0d;color:#fff">Demo Checkout</button><div class="notice" id="cartNotice" role="status" aria-live="polite"></div></div></div>
+<div id="scrollProgress" aria-hidden="true"></div><button id="backTop" aria-label="Back to top">↑</button>
+<button id="cartFloat" class="btn primary" style="position:fixed;right:20px;bottom:20px;background:#fff1df;color:#3d1909;box-shadow:0 8px 25px #0004;z-index:5">🛒 Cart (<span id="cartCount">0</span>)</button>
+<script>
+const dishes=[
+ {name:"Cappuccino",cat:"Cafe",price:149,desc:"Espresso with velvety steamed milk."},
+ {name:"Cold Coffee",cat:"Cafe",price:179,desc:"Chilled coffee, smooth and refreshing."},
+ {name:"Masala Tea",cat:"Cafe",price:79,desc:"A comforting cup with aromatic spices."},
+ {name:"Crispy French Fries",cat:"Snacks",price:129,desc:"Golden fries with a seasoning sprinkle."},
+ {name:"Paneer Sandwich",cat:"Snacks",price:189,desc:"Toasted sandwich with spiced paneer."},
+ {name:"Loaded Nachos",cat:"Snacks",price:219,desc:"Crunchy nachos with tasty toppings."},
+ {name:"Veg Fried Rice",cat:"Meals",price:229,desc:"Wok-tossed rice with fresh vegetables."},
+ {name:"Paneer Butter Masala",cat:"Meals",price:279,desc:"Paneer in a creamy tomato gravy."},
+ {name:"Classic Burger",cat:"Meals",price:199,desc:"A hearty burger with crisp lettuce."},
+ {name:"Chocolate Brownie",cat:"Dessert",price:149,desc:"Rich chocolate brownie."},
+ {name:"Vanilla Ice Cream",cat:"Dessert",price:99,desc:"Classic creamy scoop."},
+ {name:"Cheesecake Slice",cat:"Dessert",price:199,desc:"Creamy dessert with a buttery base."}
+];
+let cart={};
+const grid=document.getElementById("menuGrid");
+function renderMenu(filter="All",query=""){grid.innerHTML="";const q=query.trim().toLowerCase();const matches=dishes.filter(d=>(filter==="All"||d.cat===filter)&&(!q||`${d.name} ${d.cat} ${d.desc}`.toLowerCase().includes(q)));if(!matches.length){grid.innerHTML='<p style="color:#f5dfca;grid-column:1/-1;padding:24px 0">No matches yet. Try another search.</p>';return;}matches.forEach(d=>{const card=document.createElement("article");card.className="dish";card.innerHTML=`<span class="tag">${d.cat}</span><h3>${d.name}</h3><p>${d.desc}</p><div class="dish-foot"><span>₹${d.price}</span><button type="button" aria-label="Add ${d.name} to cart">+ Add</button></div>`;card.querySelector("button").addEventListener("click",()=>{cart[d.name]=(cart[d.name]||0)+1;updateCart();card.querySelector("button").textContent="Added ✓";setTimeout(()=>{if(card.isConnected)card.querySelector("button").textContent="+ Add"},900);});grid.appendChild(card);});}
+let activeFilter="All";document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");activeFilter=b.dataset.filter;renderMenu(activeFilter,document.getElementById("menuSearch")?.value||"");}));document.getElementById("menuSearch").addEventListener("input",e=>renderMenu(activeFilter,e.target.value));
+function updateCart(){const count=Object.values(cart).reduce((a,b)=>a+b,0);document.getElementById("cartCount").textContent=count;}
+function showCart(){const list=document.getElementById("cartList");list.innerHTML="";let total=0;Object.entries(cart).forEach(([name,qty])=>{const dish=dishes.find(d=>d.name===name);if(!dish||qty<1)return;total+=dish.price*qty;const row=document.createElement("div");row.className="cart-row";row.innerHTML=`<span>${name}<br><small>₹${dish.price} each</small></span><span class="qty-controls"><button type="button" aria-label="Remove one ${name}">−</button><b>${qty}</b><button type="button" aria-label="Add one ${name}">+</button><strong>₹${dish.price*qty}</strong></span>`;const controls=row.querySelectorAll("button");controls[0].addEventListener("click",()=>{cart[name]--;if(cart[name]<=0)delete cart[name];updateCart();showCart()});controls[1].addEventListener("click",()=>{cart[name]++;updateCart();showCart()});list.appendChild(row);});document.getElementById("cartTotal").textContent=`Subtotal: ₹${total}`;document.getElementById("cartNotice").textContent="";document.getElementById("cartModal").classList.add("show");document.getElementById("closeCart").focus();}
+document.getElementById("cartFloat").addEventListener("click",showCart);
+document.getElementById("closeCart").addEventListener("click",()=>document.getElementById("cartModal").classList.remove("show"));
+document.getElementById("cartModal").addEventListener("click",e=>{if(e.target.id==="cartModal")e.currentTarget.classList.remove("show");});
+document.getElementById("checkout").addEventListener("click",()=>{document.getElementById("cartNotice").textContent=Object.keys(cart).length?"Demo checkout preview ready. To accept real orders, connect a secure order/payment backend.":"Your cart is empty — add menu items first.";});
+document.getElementById("bookingForm").addEventListener("submit",e=>{e.preventDefault();const d=new FormData(e.currentTarget);document.getElementById("bookingNotice").textContent=`Demo request captured on this page: ${d.get("guests")} guest(s), ${d.get("date")} at ${d.get("time")}. This is not a confirmed reservation.`;});
+document.getElementById("contactForm").addEventListener("submit",e=>{e.preventDefault();document.getElementById("contactNotice").textContent="Demo form validated. No message was transmitted; connect a secure contact service for production.";e.currentTarget.reset();});
+document.getElementById("year").textContent=new Date().getFullYear();
+const cookieBanner=document.getElementById("cookieBanner");cookieBanner.style.display="block";
+["acceptCookies","rejectCookies","cookieClose"].forEach(id=>document.getElementById(id).addEventListener("click",()=>cookieBanner.style.display="none"));
+renderMenu();
+// Scroll progress and back-to-top controls
+const progress=document.getElementById("scrollProgress"),backTop=document.getElementById("backTop");
+function updateScrollUI(){const max=document.documentElement.scrollHeight-innerHeight;progress.style.width=(max>0?(scrollY/max)*100:0)+"%";backTop.classList.toggle("show",scrollY>500)}
+addEventListener("scroll",updateScrollUI,{passive:true});updateScrollUI();backTop.addEventListener("click",()=>scrollTo({top:0,behavior:"smooth"}));
+// Soft reveal on scroll, with graceful fallback for older browsers
+const revealTargets=document.querySelectorAll('section .section-head, .dish, .about>div, .booking-wrap>div, .location-grid>div, .contact-grid>div');
+revealTargets.forEach(el=>el.classList.add('reveal'));
+if('IntersectionObserver' in window){const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');revealObserver.unobserve(entry.target);}}),{threshold:.12});revealTargets.forEach(el=>revealObserver.observe(el));}else{revealTargets.forEach(el=>el.classList.add('visible'));}
+</script>
+</body>
+</html>
